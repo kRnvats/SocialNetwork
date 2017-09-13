@@ -41,12 +41,12 @@ public class BlogDaoTestCase {
 		}
 
 @Test
-public void approveBlogTest()
+public void editBlogTest()
 	{
 	Blog blog= new Blog();
-	blog.setBlogId(1996);
-	blog.setBlogName("Karan");
-	blog.setBlogContent("Karan is a Testing Tool");
+	blog.setBlogId(1995);
+	blog.setBlogName("Karan_Vats");
+	blog.setBlogContent(" is a Testing Tool");
 	blog.setUsername("vatskaran5@gmail.com");
 	blog.setCreateDate(new java.util.Date());
 	blog.setStatus("NA");
@@ -54,12 +54,30 @@ public void approveBlogTest()
 	assertTrue("Problem in Blog Creation",blogDao.createBlog(blog));
 	}
 @Test
+public void approveBlogTest()
+{
+	Blog blog = new Blog();
+	blog.setBlogId(1994);
+	blog.setStatus("A");
+	blog.setLikes(2);
+	assertTrue("Problem in Blog Creation",blogDao.approverBlog(blog));
+	
+}
+@Test
 	public void getAllApprovedBlogTest()
 	{
 	List<Blog>listBlog=blogDao.getBlog();
 	assertTrue("NoApprovedBlogs",listBlog.size()>0);
 	}
 
-	}
+	
+
+@Test
+public void deleteBlogTest()
+{
+	assertTrue("No approved Blogs",blogDao.deleteBlog(4));
+}
+
+}
 	
 		
