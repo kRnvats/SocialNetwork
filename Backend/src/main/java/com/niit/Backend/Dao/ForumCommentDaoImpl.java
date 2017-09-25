@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class ForumCommentDaoImpl implements ForumCommentDao {
 		return true;
 	}
 
-	public boolean editForumComment(Integer forumCommentId)
+	public boolean editForumComment(ForumComment forumCommentId)
 	{
 		Session s = sessionFactory.getCurrentSession();
 		s.update(forumCommentId);

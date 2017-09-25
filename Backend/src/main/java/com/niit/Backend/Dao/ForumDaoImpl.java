@@ -1,5 +1,6 @@
 package com.niit.Backend.Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -46,12 +47,12 @@ public class ForumDaoImpl implements ForumDao {
 		return null;
 	}
 
-	public boolean approverForum(Forum forum) {
+	public boolean approveForum(Forum forum) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean editForum(int forumId) {
+	public boolean editForum(Forum forumId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -59,5 +60,19 @@ public class ForumDaoImpl implements ForumDao {
 	public boolean deleteForum(int forumId) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+
+	public boolean editForum(int forumId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	public ArrayList<Forum> getAllForums() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

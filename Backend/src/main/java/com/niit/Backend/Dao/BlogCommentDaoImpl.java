@@ -1,18 +1,16 @@
 package com.niit.Backend.Dao;
 
 import java.util.List;
-
 import javax.transaction.Transactional;
-
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.Backend.Model.BlogComment;
 
-@Repository("blogCommentDao")
+@Repository("BlogCommentDao")
 @Transactional
 public class BlogCommentDaoImpl implements BlogCommentDao 
 {
@@ -28,10 +26,10 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 		return true;
 	}
 
-	public boolean editBlogComment(Integer blogCommentId) 
+	public boolean editBlogComment(BlogComment blogComment) 
 	{
 		Session s = sessionFactory.getCurrentSession();
-		s.update(blogCommentId);
+		s.update(blogComment);
 		return true;
 	}
 
@@ -52,7 +50,7 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 	    return b;
 	}
 
-	public List<BlogComment> getAllBlogComments()
+	public List<BlogComment> getALLBlogComments()
 	{
 		Session session =sessionFactory.openSession();
 		Query query = session.createQuery("from BlogComment");
@@ -60,22 +58,10 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 		return list;
 	}
 
-	public boolean addBlogComment(BlogCommentDao blogComment) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean deletBlogComment(Integer blogCommentId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	public List<BlogComment> getALLBlogComments() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
 
 }
+
+
+
+

@@ -2,11 +2,13 @@ package com.niit.Backend.Model;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Entity;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@Table(name="Blog")
 public class Blog {
 	@Id
 

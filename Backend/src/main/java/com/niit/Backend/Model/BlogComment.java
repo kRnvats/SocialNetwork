@@ -20,23 +20,23 @@ public class BlogComment implements Serializable
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int blogCommentID;
-	private int userID;
+	private int blogCommentId;
+	private int userId;
 	private String blogComment;
 	private Date blogCommentDate;
-	private int blogID;
+	private int blogId;
 	private String userName;
-	public int getBlogCommentID() {
-		return blogCommentID;
+	public int getBlogCommentId() {
+		return blogCommentId;
 	}
-	public void setBlogCommentID(int blogCommentID) {
-		this.blogCommentID = blogCommentID;
+	public void setBlogCommentId(int blogCommentId) {
+		this.blogCommentId = blogCommentId;
 	}
-	public int getUserID() {
-		return userID;
+	public int getUserId() {
+		return userId;
 	}
-	public void setUserID(int userID) {
-		this.userID = userID;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getBlogComment() {
 		return blogComment;
@@ -50,11 +50,11 @@ public class BlogComment implements Serializable
 	public void setBlogCommentDate(Date blogCommentDate) {
 		this.blogCommentDate = blogCommentDate;
 	}
-	public int getBlogID() {
-		return blogID;
+	public int getBlogId() {
+		return blogId;
 	}
-	public void setBlogID(int blogID) {
-		this.blogID = blogID;
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
 	}
 	public String getUserName() {
 		return userName;
