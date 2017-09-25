@@ -2,6 +2,7 @@ package com.niit.Backend.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,17 +19,15 @@ public class User implements Serializable
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Integer userId;
+	@Column(unique=true,nullable=false)
 	private String firstName;
 	private String lastName;
 	private String password;
-	private String emailId;
+	@Column(unique=true,nullable=false)
+	private String emailID;
 	private String role;
 	private String status;
-	private String isOnline;
-	public Integer getUserId() {
-		return userId;
-	}
+	private boolean isOnline;
 	public String getFirstName() {
 		return firstName;
 	}
@@ -47,11 +46,11 @@ public class User implements Serializable
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEmailId() {
-		return emailId;
+	public String getEmailID() {
+		return emailID;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmailID(String emailID) {
+		this.emailID = emailID;
 	}
 	public String getRole() {
 		return role;
@@ -65,16 +64,13 @@ public class User implements Serializable
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getIsOnline() {
+	public boolean isOnline() {
 		return isOnline;
 	}
-	public void setIsOnline(String isOnline) {
+	public void setOnline(boolean isOnline) {
 		this.isOnline = isOnline;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
 	}
 }

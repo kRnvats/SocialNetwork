@@ -19,10 +19,15 @@ public class UserController {
 @Autowired
 private UserService userService;
 @RequestMapping(value="/requestuser",method=RequestMethod.POST)
-	public ResponseEntity<?> registerUser(@RequestBody User user){
-		boolean result=userService.registerUser(user);
+	public ResponseEntity<?> registerUser(@RequestBody User username){
+	//validate username - unique
+	if (userService.isUsernameValid(username.getFirstName())){//username is duplicate
+		Error error=new Error(2,"User already exists.. please enter different user");
+		
+	}
+		boolean result=userService.registerUser(username);
 		if(result){
-			return new ResponseEntity<User>(user,HttpStatus.OK);//200-299
+			return new ResponseEntity<User>(username,HttpStatus.OK);//200-299
 			
 		}
 		else{
@@ -33,5 +38,6 @@ private UserService userService;
 	
 
 }
-	}
+		
+}
 }
