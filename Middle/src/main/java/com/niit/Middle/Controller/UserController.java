@@ -40,4 +40,18 @@ private UserService userService;
 }
 		
 }
+
+@RequestMapping(value="/login",method=RequestMethod.POST)
+public ResponseEntity<?> login (@RequestBody User user){
+	User validUser=userService.login(user);
+	if (validUser==null){
+		Error error=new Error(4,"Invalid Username/Password...");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		
+	}
+	return new ResponseEntity<User>(validUser,HttpStatus.OK);
+	
 }
+}
+
+
