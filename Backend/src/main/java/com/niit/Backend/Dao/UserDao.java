@@ -9,5 +9,7 @@ public interface UserDao {
 	boolean isEmailValid(String email);
 	boolean isUsernameValid(String username);
 	User login(User user);
+	public void update(User user);
+	public User getUserByUserName(String firstName);
 
 }

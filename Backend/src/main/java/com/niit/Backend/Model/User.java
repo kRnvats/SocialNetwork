@@ -24,7 +24,7 @@ public class User implements Serializable
 	private String lastName;
 	private String password;
 	@Column(unique=true,nullable=false)
-	private String emailID;
+	private String emailId;
 	private String role;
 	private String status;
 	private boolean isOnline;
@@ -46,11 +46,11 @@ public class User implements Serializable
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getEmailID() {
-		return emailID;
+	public String getEmailId() {
+		return emailId;
 	}
-	public void setEmailID(String emailID) {
-		this.emailID = emailID;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 	public String getRole() {
 		return role;

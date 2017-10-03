@@ -10,6 +10,8 @@ public interface UserService {
 	boolean isUsernameValid(String firstName);
 	boolean isEmailValid(String email);
 
+	 void update(User validUser);
+
 
 
 	
