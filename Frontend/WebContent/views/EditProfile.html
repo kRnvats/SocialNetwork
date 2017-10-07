@@ -15,18 +15,18 @@
 <form>
 
  <div class="form-group" >
-<input type="text" ng-model="user.FirstName" placeholder="Name" class="form-control">
-<span style="color:red" ng-if="error.code==2">{{error.message}}</span>
+<input type="text" ng-model="user.firstName" placeholder="Name" class="form-control" disabled>
+<span style="color:red" ng-if="error.code==2" >{{error.message}}</span>
 </div>
 
 <div class="form-group">
-<input type="text" ng-model="user.LastName" placeholder="LastName" class="form-control">
+<input type="text" ng-model="user.lastname" placeholder="LastName" class="form-control">
 </div>
 <div class="form-group">
-<input type="email" ng-model="user.EmailId" placeholder="EmailId" class="form-control">
+<input type="password" ng-model="user.password" placeholder="Password" class="form-control">
 </div>
 <div class="form-group">
-<input type="password" ng-model="user.Password" placeholder="Password" class="form-control" required="required">
+<input type="email" ng-model="user.emailId" placeholder="EmailId" class="form-control" required="required">
 <span style="color:red" ng-if="error.code==3">{{error.message}}</span>
 </div>
 <div class="radio">
@@ -36,7 +36,7 @@
 <div class="radio">
 <input type="radio" ng-model="user.role" value="Employee" >Employee</div>
 <div class="form-group">
-<input type="submit" value="Register" ng-click="registerUser()" class="form-control"></div>
+<input type="submit" value="Register" ng-click="updateUser()" class="form-control"></div>
 </form>
 </div>
 </body>

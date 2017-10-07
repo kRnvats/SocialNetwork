@@ -1,6 +1,9 @@
 package com.niit.Middle.RestController;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -12,11 +15,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.Backend.Dao.BlogDao;
 import com.niit.Backend.Model.Blog;
+import com.niit.Backend.Model.Error;
+import com.niit.Backend.Model.User;
+import com.niit.Backend.service.BlogService;
+import com.niit.Backend.service.UserService;
 
 @RestController
 
@@ -24,38 +33,51 @@ public class BlogController {
 		
 	@Autowired
 	BlogDao blogDao;
+	@Autowired
+	UserService userService;
+	@Autowired
+	BlogService blogservice;
 	
-	
-	@GetMapping(value="/getAllBlogs")
-	public ResponseEntity<ArrayList<Blog>> getAllBlogs()
-	{
-		ArrayList<Blog> listBlogs = new ArrayList<Blog>();
-		listBlogs = (ArrayList<Blog>)blogDao.getAllBlogs();
-		return new  ResponseEntity<ArrayList<Blog>>(listBlogs,HttpStatus.ACCEPTED);
-	}
 	
 
-	@PostMapping(value="/createBlog")
-	public ResponseEntity<String> createBlog(@RequestBody Blog blog)
+//	
+//	@GetMapping(value="/getAllBlogs")
+//	public ResponseEntity<ArrayList<Blog>> getAllBlogs()
+//	{
+//		ArrayList<Blog> listBlogs = new ArrayList<Blog>();
+//		listBlogs = (ArrayList<Blog>)blogDAO.getAllBlogs();
+//		return new  ResponseEntity<ArrayList<Blog>>(listBlogs,HttpStatus.ACCEPTED);
+//	}
+	
+	@RequestMapping(value="/createBlog",method=RequestMethod.POST)
+	public ResponseEntity<?> createBlog(@RequestBody Blog blog,HttpSession httpSession)
 	{				
+		String userName=(String)httpSession.getAttribute("firstName");
+		Error error= new Error(13,"Unauthroized Access");
+		if(userName==null)
+		{
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
 		blog.setCreateDate(new Date());
-	if(blogDao.createBlog(blog))
-	{
+		User postedBy=userService.getUserByUserName(userName);
+		blog.setPostedBy(postedBy);
+					try 
+					{
 		
-		
-		return new ResponseEntity<String> ("Blog Created",HttpStatus.ACCEPTED);
-
-	}
-	else {
-		return new ResponseEntity<String> ("Blog Problem",HttpStatus.METHOD_FAILURE);
-
-	}
+						blogDao.createBlog(blog);
+						System.out.println("name"+blog.getBlogName());
+						return new ResponseEntity<Blog> (blog,HttpStatus.OK);
+					}
+					catch(Exception e)
+					{
+						return new ResponseEntity<Error> (error,HttpStatus.UNAUTHORIZED);
+					}
 	
 		
 	}
 	
-	@PutMapping("/approveBlog/{blogId}")
-	public ResponseEntity<String> approveBlog (@PathVariable("blogId")Integer blogId)
+	@PutMapping("/getBlogById/{blogId}")
+	public ResponseEntity<String> approve (@PathVariable("blogId")Integer blogId)
 	{
 		Blog blog = blogDao.getBlog(blogId);
 		
@@ -73,18 +95,24 @@ public class BlogController {
 	}
 	
 	@DeleteMapping("/deleteBlog/{blogId}")
-	public ResponseEntity<String> deleteBlog (@PathVariable("blogId")Integer blogId,@RequestBody Blog blog)
+	public ResponseEntity<String> deleteBlog (@PathVariable("blogID")Integer blogId,@RequestBody Blog blog)
 	{
 		blogDao.deleteBlog(blogId);
 		return new ResponseEntity<String> ("Blog Deleted",HttpStatus.ACCEPTED);
 
 	}
 	
-	@GetMapping("/getBlog")
-	public Blog getBlog (@RequestParam("blogId") int blogId)
-	{
-		
-		return blogDao.getBlog(blogId);
+	@GetMapping("/getBlog/{blogId}")
+	public ResponseEntity<?> getBlog (@PathVariable int blogId,HttpSession httpSession)
+	{		String userName=(String)httpSession.getAttribute("firstName");
+	Error error= new Error(13,"Unauthroized Access");
+
+		if(userName==null)
+		{
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		Blog blog = blogservice.getBlog(blogId);
+		return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 
 	}
 	
@@ -97,7 +125,43 @@ public class BlogController {
 		return new ResponseEntity<String> ("Blog Edited",HttpStatus.ACCEPTED);
 	}
 
+	@RequestMapping(value="/getAllBlogs/{approved}",method=RequestMethod.GET)
+	public ResponseEntity<?> getAllBlogs (@PathVariable int approved,HttpSession httpSession)
+	{
+		String userName=(String)httpSession.getAttribute("firstName");
+		Error error= new Error(11,"Unauthroized Access");
+		
+		if(userName==null)
+		{
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		List<Blog> blog=blogDao.getAllBlogs(approved);
+		return new ResponseEntity<List<Blog>>(blog,HttpStatus.ACCEPTED);
+	}
+	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

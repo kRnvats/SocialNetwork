@@ -8,12 +8,12 @@ $scope.registerUser=function(){
 	UserService.registerUser($scope.user).then(function(response){
 	console.log(response.data)
 	console.log(response.status)
-	$location.path('/login')
+	$location.path('/Login')
 },function(response){
 	console.log(response.data)
 	console.log(response.status)
 	$scope.error=response.data;
-	$location.path('/register')
+	$location.path('/Register')
 })
 }
 $scope.login=function(){
@@ -23,10 +23,10 @@ $scope.login=function(){
 		$cookieStore.put('userDetails',response.data);
 		console.log(response.data);
 		console.log(response.status);
-		$location.path('/home')
+		$location.path('/Home')
 },function(response){
 	$scope.error=response.data.message;
-	$location.path('/login')
+	$location.path('/Login')
 		})
 	}
 	if ($rootScope.currentUser!=undefined){
@@ -39,10 +39,10 @@ $scope.login=function(){
 	$scope.logout=function()
 	{
 		UserService.logout().then(function(response){
-			$CookieStore.remove('userDetails')
+			$cookieStore.remove('userDetails')
 		},function(response){
 			$scope.error=response.data;
-			$location.path('/login')
+			$location.path('/Login')
 		})
 
 }

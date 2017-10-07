@@ -4,35 +4,52 @@
 var app=angular.module("app",['ngRoute','ngCookies'])
 app.config(function($routeProvider){
 	$routeProvider
-	.when('/register',{
-		templateUrl:'views/registrationform.html',
+	.when('/Register',{
+		templateUrl:'Views/Register.html',
 		controller:'UserController'
 	})
-	.when('/home',{
-		templateUrl:'views/home.html'
+	.when('/Home',{
+		templateUrl:'Views/Home.html'
 	})
-		.when('/login',{
-		templateUrl:'views/login.html',
+		.when('/Login',{
+		templateUrl:'Views/Login.html',
 			controller:'UserController'
 		})
-		.when('/editprofile',{
-		templateUrl:'views/editprofile.html',
+		.when('/EditProfile',{
+		templateUrl:'Views/EditProfile.html',
 			controller:'UserController'
+		})
+		.when('/createBlog',{
+			templateUrl:'views/CreateBlog.html',
+			controller:'BlogController'
+		})
+		.when('/getAllBlog',{
+			templateUrl:'views/getBlogs.html',
+			controller:'BlogController'
+		})
+		.when('/getBlogById/:id',{
+			templateUrl:'views/blogdetails.html',
+			controller:'BlogDetailController'
+		})
+		.when('/getApprovalForm/:id',{
+			templateUrl:'views/approvalBlogForm.html',
+			controller:'BlogDetailController'
 		})
 	.otherwise({
-		templateUrl:'views/home.html'
+		templateUrl:'Views/Home.html'
 	})
 
 
 })
-app.run(function($rootScope,$cookiesStore,UserService){
+app.run(function($rootScope,$cookieStore,UserService,$location){
 	if ($rootScope.currentUser==undefined)
-		$rootScope.currentUser=$cookiesStore.get('userDetails')
+		$rootScope.currentUser=$cookieStore.get('userDetails')
 		$rootScope.logout=function(){
+		delete $rootScope.currentUser;
+
 		UserService.logout().then (function(response){
-			delete $rootScope.currentUser;
-			$cookiesStore.remove('userDetails')
-			$location.path('/login')
+			$cookieStore.remove('userDetails')
+			$location.path('/Login')
 		},function(response){
 			console.log(response.status)
 		})
@@ -41,4 +58,8 @@ app.run(function($rootScope,$cookiesStore,UserService){
 
 
 
-		
+
+
+
+
+
