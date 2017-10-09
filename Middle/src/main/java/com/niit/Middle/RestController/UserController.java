@@ -23,7 +23,7 @@ private UserService userService;
 
 
 
-@RequestMapping(value="/registerUser",method=RequestMethod.POST)
+@RequestMapping(value="/RegisterUser",method=RequestMethod.POST)
 public ResponseEntity<?> registerUser(@RequestBody User user)
 {
 	if(!userService.isUsernameValid(user.getFirstName())) {//duplicate result

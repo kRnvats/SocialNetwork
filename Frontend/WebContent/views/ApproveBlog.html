@@ -2,8 +2,19 @@
 <br/>
 {{blog.blogContent}}
 <br>
-<input type="submit" value="Approve" ng-click="approve($scope.blog.blogID)">
+<input type="submit" value="Approve" ng-click="approve($scope.blog.blogId)">
 <input type="submit" value="Reject" ng-click="reject()">
 
 </div>
-<b>Approval Form</b>
+<b>Approval Form</b><br>
+<form>
+<div class="from-group">
+<input type="radio"ng-model="blog.approved" value="true">Approve
+<input type="radio"ng-model="blog.approved" value="false">Reject
+<p ng-show="showRejectionTxt">
+<textarea rows="5" cols="20" ng-model="blog.rejectionReason" class="form-control"></textarea>
+</p>
+</div>
+<input type="submit" value="update" ng-click="updateBlog()">
+
+</form>

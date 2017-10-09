@@ -1,43 +1,73 @@
-
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Registration form - Bootsnipp.com</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 60px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container"><br>
-<span style="color:red" ng-if="error.code==1">{{error.message}}</span><br>
+<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form role="form">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                <input type="text" ng-model="user.firstName" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" ng-model="user.lastName" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+			    					</div>
+			    				</div>
+			    			</div>
 
-<form>
+			    			<div class="form-group">
+			    				<input type="email" ng-model="user.emailId" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+			    			</div>
 
- <div class="form-group" >
-<input type="text" ng-model="user.FirstName" placeholder="Name" class="form-control">
-<span style="color:red" ng-if="error.code==2">{{error.message}}</span>
-</div>
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" ng-model="user.password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<input type="submit" value="Register" class="btn btn-info btn-block" ng-click="registerUser()">
+			    		
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+<script type="text/javascript">
 
-<div class="form-group">
-<input type="text" ng-model="user.LastName" placeholder="LastName" class="form-control">
-</div>
-<div class="form-group">
-<input type="email" ng-model="user.EmailId" placeholder="EmailId" class="form-control">
-</div>
-<div class="form-group">
-<input type="password" ng-model="user.Password" placeholder="Password" class="form-control" required="required">
-<span style="color:red" ng-if="error.code==3">{{error.message}}</span>
-</div>
-<div class="radio">
-<input type="radio" ng-model="user.role" value="Student">Student</div>
-<div class="radio"">
-<input type="radio" ng-model="user.role" value="ALUMINI">ALUMINI</div>
-<div class="radio">
-<input type="radio" ng-model="user.role" value="Employee" >Employee</div>
-<div class="form-group">
-<input type="submit" value="Register" ng-click="registerUser()" class="form-control"></div>
-</form>
-</div>
+</script>
 </body>
 </html>

@@ -8,8 +8,8 @@
   <script src="JS/app.js"></script>
   <script src="Controller/usercontroller.js"></script>
   <script src="services/userservice.js"></script>
-	  <script src="controllers/blogcontroller.js"></script>
-    <script src="controllers/blogdetailcontroller.js"></script>
+	  <script src="Controller/blogcontroller.js"></script>
+    <script src="Controller/blogdetailcontroller.js"></script>
   <script src="services/blogservice.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,11 +30,11 @@
       <li class="active"><a href="#!/home">Home</a></li>
       <li><a href="#!/Register" ng-hide="user.firstName">Register</a></li>
       <li><a href="#!/Login"  ng-hide="user.firstName">Login</a></li> 
-       <li><a href="#!/createBlog" ng-hide="currentUser.firstName==undefined">Add Blog</a></li>
-      <li><a href="#!/getAllBlogs" ng-hide="currentUser.firstName==undefined">Get blogs</a></li>   
+       <li><a href="#!/createBlog" ng-hide="currentUser.firstName==undefined"> Create Blog</a></li>
+      <li><a href="#!/getAllBlogs" ng-hide="currentUser.firstName==undefined">Get Blogs</a></li>   
       <li><a href="#" ng-show="user.firstName"> Welcome {{user.firstName}}</a></li>
       <li><a href="#!/EditProfile" ng-show="user.firstName">Edit Profile</a></li>
-      <li><a href="#!/logout" ng-show="user.firstName" ng-click="logout()">Logout</a> 
+      <li><a href="#!/Logout" ng-show="user.firstName" ng-click="logout()">Logout</a> 
        
       
     </ul>

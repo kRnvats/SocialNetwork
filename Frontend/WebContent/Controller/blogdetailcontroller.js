@@ -6,7 +6,7 @@ app.controller('BlogDetailController',function($scope,BlogService,$location,$rou
 	BlogService.getBlogById(id).then(function(response){
 		$scope.blog = response.data
 	},function(response){
-		$location.path('/login')
+		$location.path('/Login')
 		
 	})
 })

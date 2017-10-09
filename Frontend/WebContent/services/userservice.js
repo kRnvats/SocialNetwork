@@ -7,19 +7,31 @@ app.factory('UserService',function($http){
 		
 	
 	userService.registerUser=function(user){
-		return $http.post(BASE_URL+"/registerUser",user)
+		return $http.post(BASE_URL+"/RegisterUser",user)
 		
 		
 	}
 	userService.login=function(user){
-		return $http.post(BASE_URL+"/login",user)
+		return $http.post(BASE_URL+"/Login",user)
 }
 	userService.logout=function(){
-		return $http.put(BASE_URL+"/logout")
+		console.log("user logout");
+		return $http.put(BASE_URL+"/Logout")
 	}
 	userService.getUser=function(){
-		return $http.get(BASE_URL+"/")
+		return $http.get(BASE_URL+"/GetUser")
+	}
+	userService.updateUser= function(user)
+	{
+		return $http.put(BASE_URL+"/updateUser",user)
 	}
 	return userService;
 	
 })
+
+
+
+
+
+	
+	

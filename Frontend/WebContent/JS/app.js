@@ -19,20 +19,20 @@ app.config(function($routeProvider){
 		templateUrl:'Views/EditProfile.html',
 			controller:'UserController'
 		})
-		.when('/createBlog',{
-			templateUrl:'views/CreateBlog.html',
+		.when('/CreateBlog',{
+			templateUrl:'Views/CreateBlog.html',
 			controller:'BlogController'
 		})
-		.when('/getAllBlog',{
-			templateUrl:'views/getBlogs.html',
+		.when('/getAllBlogs',{
+			templateUrl:'Views/GetBlog.html',
 			controller:'BlogController'
 		})
 		.when('/getBlogById/:id',{
-			templateUrl:'views/blogdetails.html',
+			templateUrl:'Views/BlogDetails.html',
 			controller:'BlogDetailController'
 		})
-		.when('/getApprovalForm/:id',{
-			templateUrl:'views/approvalBlogForm.html',
+		.when('/getApproval/:id',{
+			templateUrl:'Views/ApproveBlog.html',
 			controller:'BlogDetailController'
 		})
 	.otherwise({
@@ -43,23 +43,20 @@ app.config(function($routeProvider){
 })
 app.run(function($rootScope,$cookieStore,UserService,$location){
 	if ($rootScope.currentUser==undefined)
+		{
 		$rootScope.currentUser=$cookieStore.get('userDetails')
-		$rootScope.logout=function(){
-		delete $rootScope.currentUser;
-
-		UserService.logout().then (function(response){
-			$cookieStore.remove('userDetails')
-			$location.path('/Login')
-		},function(response){
-			console.log(response.status)
-		})
-	}
+		console.log($cookieStore.get('userDetails'));
+		}
 })
-
-
-
-
-
-
-
-
+	
+//		$rootScope.logout=function(){
+//	delete $rootScope.currentUser;
+//
+//		UserService.logout().then (function(response){
+//			$cookieStore.remove('userDetails')
+//			$location.path('/Login')
+//		},function(response){
+//			console.log(response.status)
+//		})
+//	}
+//});
