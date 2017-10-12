@@ -1,32 +1,40 @@
 package com.niit.Backend.Model;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table(name="Blog")
-public class Blog {
-	@Id
+public class Blog implements Serializable {
 
-private int blogId;
-private String blogName,blogContent,status,username;
-private int likes;
-private Date CreateDate;
-public int getBlogId() {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer blogId;
+
+	@Lob
+	private String blogContent;
+	private String blogName;
+	@ManyToOne
+	private User postedBy;
+	private boolean blogStatus;
+	private Integer likes;
+	private Date createDate;
+	private String rejectionReason;
+	public Integer getBlogId() {
 		return blogId;
-	}
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
-	}
-	public String getBlogName() {
-		return blogName;
-	}
-	public void setBlogName(String blogName) {
-		this.blogName = blogName;
 	}
 	public String getBlogContent() {
 		return blogContent;
@@ -34,30 +42,47 @@ public int getBlogId() {
 	public void setBlogContent(String blogContent) {
 		this.blogContent = blogContent;
 	}
-	public String getStatus() {
-		return status;
+	public String getBlogName() {
+		return blogName;
 	}
-	public void setStatus(String status) {
-		this.status = status;
+	public void setBlogName(String blogName) {
+		this.blogName = blogName;
 	}
-	public String getUsername() {
-		return username;
+	public User getPostedBy() {
+		return postedBy;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setPostedBy(User postedBy) {
+		this.postedBy = postedBy;
+	}
+	public boolean isBlogStatus() {
+		return blogStatus;
+	}
+	public void setBlogStatus(boolean blogStatus) {
+		this.blogStatus = blogStatus;
+	}
+	public Integer getLikes() {
+		return likes;
+	}
+	public void setLikes(Integer likes) {
+		this.likes = likes;
 	}
 	public Date getCreateDate() {
-		return CreateDate;
+		return createDate;
 	}
 	public void setCreateDate(Date createDate) {
-		this.CreateDate = createDate;
+		this.createDate = createDate;
 	}
-public int getLikes() {
-	return likes;
-}
-public void setLikes(int likes) {
-	this.likes = likes;
-}
-
-
+	public String getRejectionReason() {
+		return rejectionReason;
+	}
+	public void setRejectionReason(String rejectionReason) {
+		this.rejectionReason = rejectionReason;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	public void setBlogId(Integer blogId) {
+		this.blogId = blogId;
+	}
+	
 }

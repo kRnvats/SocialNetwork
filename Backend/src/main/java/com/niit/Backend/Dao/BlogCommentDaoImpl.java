@@ -60,6 +60,12 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 
 	
 
+	public List<BlogComment> getBlogComments(int BlogId) {
+		Session session =sessionFactory.openSession();
+		Query query = session.createQuery("from BlogComment where blog.blogId="+BlogId);
+		List<BlogComment> list=query.list();
+		return list;
+	}
 }
 
 

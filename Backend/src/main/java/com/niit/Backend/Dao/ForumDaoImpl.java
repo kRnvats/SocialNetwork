@@ -7,11 +7,13 @@ import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.niit.Backend.Model.Forum;
-
+@Repository("ForumDao")
+@Transactional
 public class ForumDaoImpl implements ForumDao {
-
+	
 	@Autowired
 	SessionFactory sessionFactory;
 	{this.sessionFactory = sessionFactory;
@@ -64,10 +66,6 @@ public class ForumDaoImpl implements ForumDao {
 
 
 
-	public boolean editForum(int forumId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 
 

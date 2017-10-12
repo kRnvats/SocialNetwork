@@ -19,7 +19,7 @@ app.config(function($routeProvider){
 		templateUrl:'Views/EditProfile.html',
 			controller:'UserController'
 		})
-		.when('/CreateBlog',{
+		.when('/createBlog',{
 			templateUrl:'Views/CreateBlog.html',
 			controller:'BlogController'
 		})
@@ -45,7 +45,7 @@ app.run(function($rootScope,$cookieStore,UserService,$location){
 	if ($rootScope.currentUser==undefined)
 		{
 		$rootScope.currentUser=$cookieStore.get('userDetails')
-		console.log($cookieStore.get('userDetails'));
+		console.log('hello'+ $cookieStore.get('userDetails'));
 		}
 })
 	

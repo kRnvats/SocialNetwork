@@ -3,8 +3,10 @@ package com.niit.Backend.Dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,16 +19,12 @@ public class BlogDaoImpl implements BlogDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
-//	{ this.sessionFactory = sessionFactory;
-//	
-//	}
-//	
 	@Transactional
 	public boolean createBlog(Blog blog) 
 	{
 		try
 		{
-			blog.setStatus("A");
+			blog.setBlogStatus(false);
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
 		}
@@ -38,43 +36,45 @@ public class BlogDaoImpl implements BlogDao {
 			
 	}
 	public boolean editBlog(Blog blog) {
-		// TODO Auto-generated method stub
+		Session s = sessionFactory.getCurrentSession();
+		blog.setBlogName("ABCD");
+		s.update(blog);
 		return false;
 	}
-
-	public boolean deleteBlog(int blogId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public Blog getBlog(int blogId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-
-	public boolean approveBlog(Blog blog) {
-		// TODO Auto-generated method stub
+	public boolean deleteBlog(Integer blogId) {
+		Session s1= sessionFactory.getCurrentSession();
+		Blog b =(Blog)s1.load(Blog.class, blogId);
+		s1.delete(b);
 		return false;
 	}
-
-	public List<Blog> getBlog() {
-		// TODO Auto-generated method stub
-		return null;
+	public Blog getBlog(Integer blogId) {
+		Session session = sessionFactory.getCurrentSession();
+		Blog blog=(Blog)session.get(Blog.class,blogId);
+		return blog;
 	}
-
-	public boolean approverBlog(Blog blog) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<Blog> getAllBlogs(int approved) {
+		Session session =sessionFactory.openSession();
+		String querys="";
+		if(approved==1)
+				querys="from Blog where blogStatus="+approved;
+		else
+			querys="from Blog where  rejectionReason is null and blogStatus="+approved;
+		Query query = session.createQuery(querys);
+		List<Blog> list=query.getResultList();
+		return list;
 	}
-	public ArrayList<Blog> getAllBlogs() {
-		// TODO Auto-generated method stub
-		return null;
+	public void approveBlog(Blog blog) {
+		Session s = sessionFactory.getCurrentSession();
+		blog.setBlogStatus(true);
+		s.update(blog);
 	}
-	public boolean editBlog(int blogId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+//
+//	public List<Blog> getAllBlogsRejected(int rejected) {
+//		Session session =sessionFactory.openSession();
+//		
+//		Query query = session.createQuery("from Blog where rejectionReason!=null and blogStatus="+rejected);
+//		List<Blog> list=query.getResultList();
+//		return list;
+//	}
 }

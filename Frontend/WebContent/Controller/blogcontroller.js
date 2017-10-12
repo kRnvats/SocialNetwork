@@ -1,18 +1,19 @@
 app.controller('BlogController',function($scope,BlogService,$location){
-	$scope.addBlog=function(){
+	$scope.createBlog=function(){
 		BlogService.createBlog($scope.blog).then(function(response){
-			Console.log("right");
+			console.log("right");
 			alert('Blog added successfully and waiting for approval..')
 		},function(response){//response.status[401/500]
 			$scope.error=response.data
 			if(response.status==401)
-				$location.path('/Login')
+				$location.path('/CreateBlog')
 				
 		},function(response){
 			console.log(response.status);
 			console.log(response.message);
 			$scope.error=response.data;
 			$location.path('/Login');
+				
 		})
 	}	
 	
@@ -27,9 +28,6 @@ app.controller('BlogController',function($scope,BlogService,$location){
 		})
 	}
 	
-	
-	
-	
 	function blogsWaitingForApproval(){
 		BlogService.blogsWaitingForApproval().then (function(response){
 			$scope.listOfBlogsWaitingForApproval=response.data
@@ -37,10 +35,49 @@ app.controller('BlogController',function($scope,BlogService,$location){
 			if(response.status==401)
 				$location.path('/Login')
 		})
-		}
-	blogApproved()
+//		}
+//	function blogsRejected(){
+//		BlogService.blogsRejected().then(function(response){
+//			$scope.listOfBlogsRejected=response.data
+//		},function(response){
+//			$location.path('/Login')
+//		
+//		})
+	}
+	blogsApproved()
 	blogsWaitingForApproval()
+//	blogsRejected()
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

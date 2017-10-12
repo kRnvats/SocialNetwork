@@ -16,6 +16,8 @@ import com.niit.Backend.Model.Blog;
 import com.niit.Backend.Model.BlogComment;
 import com.niit.Backend.Model.Forum;
 import com.niit.Backend.Model.ForumComment;
+import com.niit.Backend.Model.Friend;
+import com.niit.Backend.Model.Job;
 import com.niit.Backend.Model.User;
 
 @Configuration
@@ -53,6 +55,11 @@ public SessionFactory getSessionFactory()
 	LocalSessionFactoryBuilder localSessionFactoryBuilder = new LocalSessionFactoryBuilder(getOracleDataSource());
 	localSessionFactoryBuilder.addProperties(getHibernateProperties());
 	localSessionFactoryBuilder.addAnnotatedClass(Blog.class);
+	localSessionFactoryBuilder.addAnnotatedClass(User.class);
+	localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
+	localSessionFactoryBuilder.addAnnotatedClass(Job.class);
+	localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
+	
 	return localSessionFactoryBuilder.buildSessionFactory();
 }
 		

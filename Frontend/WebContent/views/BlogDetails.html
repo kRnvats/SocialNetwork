@@ -5,9 +5,30 @@
 <title>Insert title here</title>
 </head>
 <body>
-{{blog.blogName}}
-{{blog.blogContent}}
+
+<div class="container">
+  <h2>Basic Panel</h2>
+  <div class="panel panel-default">
+    <div class="panel-heading">{{blog.blogName}}</div>
+   <span class="panel-heading">Created BY {{blog.postedBy.firstName}}</span>
+  	<span class="panel-heading">On:{{blog.createDate|date :'DD-MM-YYYY'}}</span>
+  	    <div class="panel-body">{{blog.blogContent}}</div>
+  	   <a><span class="glyphicon glyphicon-thumbs-up" ng-class="isLiked?'liked':'default'" ng-click="updateLike()">{{blog.likes}}</span></a>
+  	  </div>
 
 <b>Text Area for Comments</b>
+<textarea rows="3" cols="25" ng-model="blogComment.blogCommentText"></textarea>
+<button class="btn btn-primary" value="POST COMMENT" ng-click="addComment()">Add</button>
+<br>
+<b>Comments</b>
+<table>
+<ul ng-repeat="blogs in blogComments" ng-init="getBlogComments()"  style="list-style: none">
+ <li>{{blogs.postedBy.firstName}} On {{blogs.blogCommentDate|date:'DD/MM/YYYY'}} </li>
+ <li>{{blogs.blogCommentText}}</li> 
+</ul>
+
+</table>
+</div>
 </body>
 </html>
+

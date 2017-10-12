@@ -7,18 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+@Table(name="user_table")
 public class User implements Serializable 
 {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(unique=true,nullable=false)
 	private String firstName;
 	private String lastName;

@@ -84,7 +84,7 @@ public ResponseEntity<?> logout(HttpSession session)
 	session.invalidate();
 	return new ResponseEntity<String>("Logout",HttpStatus.ACCEPTED);
 }
-@RequestMapping(value="/getUser",method=RequestMethod.GET)
+@RequestMapping(value="/GetUser",method=RequestMethod.GET)
 
 public ResponseEntity<?> getUser(HttpSession session)
 {

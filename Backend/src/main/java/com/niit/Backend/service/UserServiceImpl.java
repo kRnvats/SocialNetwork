@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.niit.Backend.Dao.UserDao;
 import com.niit.Backend.Model.User;
-@Service
+@Service("UserService")
 public class UserServiceImpl implements UserService{
 
 

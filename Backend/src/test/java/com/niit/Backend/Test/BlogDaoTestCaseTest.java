@@ -34,9 +34,8 @@ public class BlogDaoTestCaseTest {
 		blog.setBlogId(1996);
 		blog.setBlogName("Karan");
 		blog.setBlogContent("Karan is a Testing Tool");
-		blog.setUsername("vatskaran5@gmail.com");
 		blog.setCreateDate(new java.util.Date());
-		blog.setStatus("NA");
+		blog.setBlogStatus(true);
 		blog.setLikes(0);
 		blogDao.createBlog(blog);
 		assertTrue("Problem in Blog Creation",blogDao.createBlog(blog));
@@ -49,9 +48,8 @@ public void editBlogTest()
 	blog.setBlogId(1995);
 	blog.setBlogName("Karan_Vats");
 	blog.setBlogContent(" is a Testing Tool");
-	blog.setUsername("vatskaran5@gmail.com");
 	blog.setCreateDate(new java.util.Date());
-	blog.setStatus("NA");
+	blog.setBlogStatus(true);
 	blog.setLikes(0);
 	assertTrue("Problem in Blog Creation",blogDao.createBlog(blog));
 	}
@@ -61,7 +59,7 @@ public void approveBlogTest()
 {
 	Blog blog = new Blog();
 	blog.setBlogId(1994);
-	blog.setStatus("A");
+	blog.setBlogStatus(true);
 	blog.setLikes(2);
 	assertTrue("Problem in Blog Creation",blogDao.approveBlog(blog));
 	
@@ -70,11 +68,11 @@ public void approveBlogTest()
 @Test
 	public void getAllApprovedBlogTest()
 	{
-	List<Blog>listBlog=blogDao.getBlog();
+	List<Blog>listBlog=blogDao.getAllBlogs();
 	assertTrue("NoApprovedBlogs",listBlog.size()>0);
 	}
 
-	
+
 
 @Test
 public void deleteBlogTest()
@@ -84,4 +82,6 @@ public void deleteBlogTest()
 
 }
 	
-		
+
+	
+	

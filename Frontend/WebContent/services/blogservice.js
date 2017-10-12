@@ -1,12 +1,12 @@
 app.factory('BlogService',function($http){
-	var blogPostService={}
+	var blogService={};
 var BASE_URL="http://localhost:8087/Middle"
 blogService.createBlog=function(blog){
 		
 		return $http.post(BASE_URL+"/createBlog",blog)
 			
 		}
-	blogService.blogsWaitingForApprove = function()	
+	blogService.blogsWaitingForApproval = function()	
 
 {
 
@@ -24,10 +24,24 @@ blogService.getBlogById = function(id){
 	return $http.get(BASE_URL+"/getBlog/"+id)
 
 }
+
+blogService.approve = function(blog)
+{
+	
+	return $http.put(BASE_URL+"/approveBlog",blog);
+}
+
+blogService.addComment = function(blogComment)
+{
+	return $http.post(BASE_URL+"/addBlogComment",blogComment)
+}
+blogService.getBlogComments = function(id)
+{
+	return $http.get(BASE_URL+"/getBlogComments/"+id)
+
+}
 	return blogService;
 })
-
-
 
 
 

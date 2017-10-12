@@ -33,6 +33,7 @@ $scope.login=function(){
 	$location.path('/Login')
 		})
 	}
+
 	if ($rootScope.currentUser!=undefined){
 		UserService.getUser().then(function(response){
 			$scope.user=response.data;

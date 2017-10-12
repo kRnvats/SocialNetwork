@@ -39,11 +39,11 @@ private SessionFactory sessionFactory;
 }
 		public User login(User user){
 			Session session = sessionFactory.getCurrentSession();
-			Query query=session.createQuery("from User where firstname=? and password=?");
-			query.setString(0,user.getFirstName());
+			Query query=session.createQuery("from User where emailId=? and password=?");
+			query.setString(0,user.getEmailId());
 			query.setString(1,user.getPassword());
 			
-			return (User)query.uniqueResult();
+			return (User) query.uniqueResult();
 			
 		}
 	

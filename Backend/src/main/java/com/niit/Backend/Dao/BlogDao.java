@@ -7,12 +7,11 @@ import java.util.List;
 
 public interface BlogDao {
 
-	public  boolean createBlog(Blog blog);
-	public Blog getBlog(int blogId);
-	public List <Blog>getBlog();
-	public boolean approveBlog(Blog blog);
+	public boolean createBlog(Blog blog);
 	public boolean editBlog(Blog blog);
-	public boolean deleteBlog(int blogId);
-	public ArrayList<Blog> getAllBlogs();
-	
+	public boolean deleteBlog(Integer blogId);
+	public Blog getBlog(Integer blogId);
+	public List<Blog> getAllBlogs(int approved);
+	public void approveBlog(Blog blog);
 }
+
