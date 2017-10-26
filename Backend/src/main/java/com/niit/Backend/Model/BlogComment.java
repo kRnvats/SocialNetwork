@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
 
@@ -20,29 +23,32 @@ public class BlogComment implements Serializable
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int blogCommentId;
-	private int userId;
-	private String blogComment;
+	private int blogCommentID;
+	@ManyToOne
+	@JoinColumn(name="firstName")
+	private User postedBy;
+	private String blogCommentText;
 	private Date blogCommentDate;
-	private int blogId;
-	private String userName;
-	public int getBlogCommentId() {
-		return blogCommentId;
+	@ManyToOne
+	@JoinColumn(name="blogID")
+	private Blog blog;
+	public int getBlogCommentID() {
+		return blogCommentID;
 	}
-	public void setBlogCommentId(int blogCommentId) {
-		this.blogCommentId = blogCommentId;
+	public void setBlogCommentID(int blogCommentID) {
+		this.blogCommentID = blogCommentID;
 	}
-	public int getUserId() {
-		return userId;
+	public User getPostedBy() {
+		return postedBy;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setPostedBy(User postedBy) {
+		this.postedBy = postedBy;
 	}
-	public String getBlogComment() {
-		return blogComment;
+	public String getBlogCommentText() {
+		return blogCommentText;
 	}
-	public void setBlogComment(String blogComment) {
-		this.blogComment = blogComment;
+	public void setBlogCommentText(String blogCommentText) {
+		this.blogCommentText = blogCommentText;
 	}
 	public Date getBlogCommentDate() {
 		return blogCommentDate;
@@ -50,19 +56,14 @@ public class BlogComment implements Serializable
 	public void setBlogCommentDate(Date blogCommentDate) {
 		this.blogCommentDate = blogCommentDate;
 	}
-	public int getBlogId() {
-		return blogId;
+	public Blog getBlog() {
+		return blog;
 	}
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setBlog(Blog blog) {
+		this.blog = blog;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 }

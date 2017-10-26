@@ -1,15 +1,13 @@
-package com.niit.Backend.Dao;
+package com.niit.Backend.service;
 
 import java.util.List;
 
 import com.niit.Backend.Model.Job;
 
-public interface JobDao {
-
+public interface JobService {
+	
 	void addJob(Job job);
-
-	public List<Job> getAllJobs();
-
+	List<Job> getAllJobs();
 	Job deleteJob(int delete);
-
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.niit.Backend.Dao.BlogDao;
 import com.niit.Backend.Model.Blog;
+import com.niit.Backend.Model.BlogComment;
 
 @Service
 public class BlogServiceImpl implements BlogService {
@@ -28,5 +29,7 @@ BlogDao blogDao;
 		return blogDao.getBlog(id);
 	}
 	
-
+//	public List<Blog> getAllBlogsRejected(int rejected) {
+//		return blogDao.getAllBlogsRejected(rejected);
+//	}
 }

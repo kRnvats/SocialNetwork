@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class ForumCommentDaoImpl implements ForumCommentDao {
 		Session s1 =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		Query q = s1.createQuery("from ForumComment where forumCommentId="+forumCommentId);
-	    ForumComment b = (ForumComment)q.getSingleResult();
+	    ForumComment b = (ForumComment)q.uniqueResult();
 	    return b;
 	}
 
@@ -55,7 +55,7 @@ public class ForumCommentDaoImpl implements ForumCommentDao {
 	{
 		Session session =sessionFactory.openSession();
 		Query query = session.createQuery("from ForumComment");
-		List<ForumComment> list=query.getResultList();
+		List<ForumComment> list=query.list();
 		return list;
 	}
 

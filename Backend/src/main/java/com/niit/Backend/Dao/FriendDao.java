@@ -1,16 +1,12 @@
 package com.niit.Backend.Dao;
-
-import com.niit.Backend.Model.Friend;
-
 import java.util.List;
 
-public interface FriendDao {
+import com.niit.Backend.Model.Friend;
+import com.niit.Backend.Model.User;
 
-	public  boolean addFriend(Friend friend);
-	public Friend getFriend(int friendId);
-	public List <Friend>getFriend();
-	public boolean approverFriend(Friend friend);
-	public boolean editFriend(int friendId);
-	public boolean deleteFriend(int friendId);
-	
+public interface FriendDao {
+List<User>listOfSuggestedUsers(String Username);
+
+List<Friend> pendingRequests(String username);
+
 }

@@ -6,11 +6,8 @@ public interface BlogCommentDao {
 
 	public boolean addBlogComment(BlogComment blogComment);
 	public boolean editBlogComment(BlogComment  blogComment);
-	
+	public boolean deleteBlogComment(Integer blogCommentId);
 	public BlogComment getBlogComment(Integer blogCommentId);
 	public List<BlogComment> getALLBlogComments();
-	public boolean deleteBlogComment(Integer blogCommentId);
-	
-	
-	
+	public List<BlogComment> getBlogComments(int blogId);
 }

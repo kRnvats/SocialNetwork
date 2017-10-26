@@ -12,6 +12,8 @@ public interface BlogDao {
 	public boolean deleteBlog(Integer blogId);
 	public Blog getBlog(Integer blogId);
 	public List<Blog> getAllBlogs(int approved);
+//	public List<Blog> getAllBlogsRejected(int rejected);
+
 	public void approveBlog(Blog blog);
 }
 

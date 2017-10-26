@@ -4,7 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -21,9 +21,16 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 	
 	public boolean addBlogComment(BlogComment blogComment)
 	{
+		try{
+			System.out.println("blogcomment name      "+blogComment.getBlogCommentText());
 		Session s = sessionFactory.getCurrentSession();
-		s.saveOrUpdate(blogComment);
+		s.save(blogComment);
 		return true;
+		}
+		catch(Exception e){
+			System.out.println("error is  "+e.getMessage());
+			return false;
+		}
 	}
 
 	public boolean editBlogComment(BlogComment blogComment) 
@@ -45,8 +52,8 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 	{
 		Session s1 =sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
-		Query q = s1.createQuery("from BlogComment where blogCommentId="+blogCommentId);
-	    BlogComment b = (BlogComment)q.getSingleResult();
+		Query q = s1.createQuery("from BlogComment where blogCommentID="+blogCommentId);
+	    BlogComment b = (BlogComment)q.uniqueResult();
 	    return b;
 	}
 
@@ -54,17 +61,21 @@ public class BlogCommentDaoImpl implements BlogCommentDao
 	{
 		Session session =sessionFactory.openSession();
 		Query query = session.createQuery("from BlogComment");
-		List<BlogComment> list=query.getResultList();
+		List<BlogComment> list=query.list();
 		return list;
 	}
 
 	
 
 	public List<BlogComment> getBlogComments(int BlogId) {
-		Session session =sessionFactory.openSession();
+		try{Session session =sessionFactory.openSession();
 		Query query = session.createQuery("from BlogComment where blog.blogId="+BlogId);
 		List<BlogComment> list=query.list();
-		return list;
+		return list;}
+		catch(Exception e ){
+			System.out.println("erron in getting comments "+e.getMessage() );
+			return null;
+		}
 	}
 }
 

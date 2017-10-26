@@ -3,7 +3,7 @@ package com.niit.Backend.Dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
+import org.hibernate.Query;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -61,7 +61,7 @@ public class BlogDaoImpl implements BlogDao {
 		else
 			querys="from Blog where  rejectionReason is null and blogStatus="+approved;
 		Query query = session.createQuery(querys);
-		List<Blog> list=query.getResultList();
+		List<Blog> list=query.list();
 		return list;
 	}
 	public void approveBlog(Blog blog) {
@@ -69,12 +69,12 @@ public class BlogDaoImpl implements BlogDao {
 		blog.setBlogStatus(true);
 		s.update(blog);
 	}
-//
+
 //	public List<Blog> getAllBlogsRejected(int rejected) {
 //		Session session =sessionFactory.openSession();
 //		
 //		Query query = session.createQuery("from Blog where rejectionReason!=null and blogStatus="+rejected);
-//		List<Blog> list=query.getResultList();
-//		return list;
+//		List<Blog> list=query.list();
+//		return null;
 //	}
 }
