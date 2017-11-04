@@ -2,6 +2,9 @@ package com.niit.Middle.RestController;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +18,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.Backend.Dao.BlogCommentDao;
+import com.niit.Backend.Model.Blog;
 import com.niit.Backend.Model.BlogComment;
+import com.niit.Backend.Model.Error;
+import com.niit.Backend.Model.User;
+import com.niit.Backend.service.BlogCommentService;
+import com.niit.Backend.service.BlogService;
+import com.niit.Backend.service.UserService;
 
 @RestController
 public class BlogCommentController {
@@ -23,25 +32,41 @@ public class BlogCommentController {
 	@Autowired
 	BlogCommentDao blogCommentDao;
 	
-	@GetMapping(value="/getAllBlogComments()")
-	public ResponseEntity<ArrayList<BlogComment>> getAllBlogComments()
+	@Autowired
+	BlogCommentService blogCommentService;
+	@Autowired
+	UserService userService;
+	@Autowired 
+	BlogService blogService;
+	
+	
+	@PostMapping(value="/addBlogComment/{blogId}")
+	
+	public ResponseEntity<?> createBlogComment(@RequestBody BlogComment blogComment,@PathVariable ("blogId")int blogId, HttpSession httpSession)
 	{
-		ArrayList<BlogComment> listBlogs = new ArrayList<BlogComment>();
-		listBlogs = (ArrayList<BlogComment>)blogCommentDao.getALLBlogComments();
-		return new  ResponseEntity<ArrayList<BlogComment>>(listBlogs,HttpStatus.ACCEPTED);
-	}
-	@PostMapping(value="/addBlogComment")
-	public ResponseEntity<String> createBlogComment(@RequestBody BlogComment blogComment)
-	{				
+		System.out.println("test id    ======="+blogId);
+		String userName=(String)httpSession.getAttribute("firstName");
+		System.out.println("user name=== "+userName);
+		Error error= new Error(13,"Unauthroized Access");
+		if(userName==null)
+		{
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		Blog blog=blogService.getBlog(blogId);
+		System.out.println("blog ======="+blog.getBlogName());
+		blogComment.setBlog(blog);
+		User postedBy= userService.getUserByUserName(userName);
+		blogComment.setPostedBy(postedBy);
 		blogComment.setBlogCommentDate(new Date());
-	if(blogCommentDao.addBlogComment(blogComment))
-	{
+		try {
+			blogCommentService.addBlogComment(blogComment);
+	
 		
-		return new ResponseEntity<String> ("Blog Created",HttpStatus.ACCEPTED);
+		return new ResponseEntity<BlogComment> (blogComment,HttpStatus.ACCEPTED);
 
 	}
-	else {
-		return new ResponseEntity<String> ("Blog Problem",HttpStatus.METHOD_FAILURE);
+	catch(Exception e){
+		return new ResponseEntity<Error> (error,HttpStatus.BAD_REQUEST);
 
 	}
 	
@@ -56,13 +81,28 @@ public class BlogCommentController {
 		blogCommentDao.editBlogComment(blogComment);
 		return new ResponseEntity<String> ("Blog Edited",HttpStatus.ACCEPTED);
 	}
-	@GetMapping("/getBlogComment/{blogId}")
-	public BlogComment getBlog (@PathVariable("blogId") int blogId)
+	
+	@GetMapping("/getBlogComments/{blogId}")
+	public  ResponseEntity<?> getBlogComments  (@PathVariable int blogId,HttpSession httpSession)
 	{
+		System.out.println("HEY buddy");
 		
-		return blogCommentDao.getBlogComment(blogId);
-
+		String userName=(String)httpSession.getAttribute("firstName");
+		
+		Error error= new Error(13,"Unauthroized Access");
+		if(userName==null)
+		{
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		System.out.println("hello test");
+		List<BlogComment> blogComments = blogCommentService.getBlogComments(blogId);
+		System.out.println("testing string");
+		for(BlogComment b:blogComments){
+		}
+		return new ResponseEntity<List<BlogComment>>(blogComments,HttpStatus.OK);
 	}
+	
+	
 	
 	@DeleteMapping("/deleteBlogComment/{blogId}")
 	public ResponseEntity<String> deleteBlogComment (@PathVariable("blogId")Integer blogId,@RequestBody BlogComment blogComment)
@@ -74,3 +114,38 @@ public class BlogCommentController {
 	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

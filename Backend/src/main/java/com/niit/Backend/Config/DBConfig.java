@@ -18,7 +18,7 @@ import com.niit.Backend.Model.Forum;
 import com.niit.Backend.Model.ForumComment;
 import com.niit.Backend.Model.Friend;
 import com.niit.Backend.Model.Job;
-import com.niit.Backend.Model.ProfilePicture;
+import com.niit.Backend.Model.UploadFile;
 import com.niit.Backend.Model.User;
 
 @Configuration
@@ -60,7 +60,7 @@ public SessionFactory getSessionFactory()
 	localSessionFactoryBuilder.addAnnotatedClass(Forum.class);
 	localSessionFactoryBuilder.addAnnotatedClass(Job.class);
 	localSessionFactoryBuilder.addAnnotatedClass(Friend.class);
-	localSessionFactoryBuilder.addAnnotatedClass(ProfilePicture.class);
+	localSessionFactoryBuilder.addAnnotatedClass(UploadFile.class);
 	localSessionFactoryBuilder.addAnnotatedClass(BlogComment.class);
 	
 	return localSessionFactoryBuilder.buildSessionFactory();

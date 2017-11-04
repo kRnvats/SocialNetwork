@@ -7,7 +7,7 @@
 <tbody>
 <tr ng-repeat="blogs in listOfBlogsWaitingForApproval">
 
-<td><a href="#!/getApprovalForm/{{blogs.blogId}}">{{blogs.blogName}}</a></td>
+<td><a href="#!/getApproval/{{blogs.blogId}}">{{blogs.blogName}}</a></td>
 <td>{{blogs.postedBy.firstName}}</td>
 <td>{{blogs.blogContent}}</td>
 <td>{{blogs.createDate | date :'DD/MM/YYYY'}}</td>

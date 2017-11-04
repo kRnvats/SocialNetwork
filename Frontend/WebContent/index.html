@@ -11,6 +11,8 @@
 	  <script src="Controller/blogcontroller.js"></script>
     <script src="Controller/blogdetailcontroller.js"></script>
   <script src="services/blogservice.js"></script>
+  <script src="Controller/jobcontroller.js"></script>
+  <script src="Controller/friendscontroller.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -30,13 +32,15 @@
       <li class="active"><a href="#!/home">Home</a></li>
       <li><a href="#!/Register" ng-show="currentUser.firstName==undefined">Register</a></li>
       <li><a href="#!/Login"  ng-show="currentUser.firstName==undefined">Login</a></li> 
-       <li><a href="#!/createBlog" ng-hide="currentUser.firstName==undefined"> Create Blog</a></li>
+      <li><a href="#!/createBlog" ng-hide="currentUser.firstName==undefined"> Create Blog</a></li>
       <li><a href="#!/getAllBlogs" ng-hide="currentUser.firstName==undefined">Get Blogs</a></li>   
       <li><a href="#" ng-hide="currentUser.firstName==undefined"> Welcome {{currentUser.firstName}}</a></li>
       <li><a href="#!/EditProfile" ng-hide="currentUser.firstName==undefined">Edit Profile</a></li>
       <li><a href="#!/Logout" ng-hide="currentUser.firstName==undefined" ng-click="logout()">Logout</a> 
-       
-      
+      <li><a href="#!/uploadProfilePic" ng-hide="currentUser.firstName==undefined"><img src="http://localhost:8087/Middle/getImage/{{currentUser.firstName}}" style="height:40px;width:40px" class="img-rounded"></a></li>
+      <li><a href="#!/Job" ng-show="currentUser.role==undefined"> Job</a></li>
+      <li><a href="#!/getAllJobs" ng-hide="currentUser.firstName==undefined">Get All Jobs</a></li>
+     
     </ul>
   </div>
 </nav>

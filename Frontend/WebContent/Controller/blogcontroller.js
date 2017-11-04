@@ -35,7 +35,7 @@ app.controller('BlogController',function($scope,BlogService,$location){
 			if(response.status==401)
 				$location.path('/Login')
 		})
-//		}
+		}
 //	function blogsRejected(){
 //		BlogService.blogsRejected().then(function(response){
 //			$scope.listOfBlogsRejected=response.data
@@ -43,7 +43,7 @@ app.controller('BlogController',function($scope,BlogService,$location){
 //			$location.path('/Login')
 //		
 //		})
-	}
+//	}
 	blogsApproved()
 	blogsWaitingForApproval()
 //	blogsRejected()

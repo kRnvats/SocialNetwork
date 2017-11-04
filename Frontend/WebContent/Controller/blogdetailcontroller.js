@@ -2,7 +2,9 @@
  * 
  */
 app.controller('BlogDetailController',function($scope,BlogService,$location,$routeParams){
+	$scope.isRejected=false
 	var id=$routeParams.id;
+	$scope.isLiked=false;
 	BlogService.getBlogById(id).then(function(response){
 		$scope.blog = response.data
 	},function(response){
@@ -48,12 +50,13 @@ app.controller('BlogDetailController',function($scope,BlogService,$location,$rou
 			
 		})
 	}
-	$scope.addComment = function()
+	$scope.addComment = function(Id)
 	{
 		$scope.blogComment.blog = $scope.blog;
 		console.log($scope.blogComment.blog);
-		BlogService.addComment($scope.blogComment).then(function(response){
-			
+		BlogService.addComment($scope.blogComment,Id).then(function(response){
+			$scope.blogComment.blogCommentText="";
+			getBlogComments();
 		},function(response){
 			$location.path('/getBlogById/'+$scope.blog.blogId)
 		})

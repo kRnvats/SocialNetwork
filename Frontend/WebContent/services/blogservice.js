@@ -31,9 +31,9 @@ blogService.approve = function(blog)
 	return $http.put(BASE_URL+"/approveBlog",blog);
 }
 
-blogService.addComment = function(blogComment)
+blogService.addComment = function(blogComment,id)
 {
-	return $http.post(BASE_URL+"/addBlogComment",blogComment)
+	return $http.post(BASE_URL+"/addBlogComment/"+id,blogComment)
 }
 blogService.getBlogComments = function(id)
 {

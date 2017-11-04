@@ -31,7 +31,3 @@ app.factory('UserService',function($http){
 
 
 
-
-
-	
-	

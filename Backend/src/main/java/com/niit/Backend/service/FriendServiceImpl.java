@@ -9,24 +9,34 @@ import com.niit.Backend.Dao.FriendDao;
 import com.niit.Backend.Model.Friend;
 import com.niit.Backend.Model.User;
 
+import oracle.net.aso.r;
+
+
 @Service
 public class FriendServiceImpl implements FriendService{
 	@Autowired
-	private FriendDao friendDao;
-	public List<User> listOfSuggestedUsers(String UserName){
-		return friendDao.listOfSuggestedUsers(UserName);
-		
+	
+	FriendDao friendDao;
+	public List<User> listOfSuggestedUsers(String userName) {
+		return friendDao.listOfSuggestedUsers(userName);
 	}
 
 	public void friendRequest(Friend friend) {
-		// TODO Auto-generated method stub
+		friendDao.friendRequest(friend);
 		
 	}
-	public List<Friend> pendingRequests(String username) {
-		
-		return friendDao.pendingRequests(username);
+
+	public List<r> pendingRequests(String toId) {
+		return friendDao.pendingRequests(toId);
+	}
+
+	public void updatePendingRequests(Friend friend) {
+		friendDao.updatePendingRequest(friend);
 		
 	}
-	
+
+	public List<String> listOfFriends(String userName) {
+		return friendDao.listOfFriends(userName);
+	}
 
 }

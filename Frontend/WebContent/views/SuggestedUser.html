@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table class="table table-striped">
+<tbody>
+<tr ng-repeat="request in SuggestedUsers">
+	<td>{{request.firstName}}</td>
+	<td><a class="btn btn-primary" ng-click="sendFriendRequest(request.firstName)">Add</a></td>
+	
+	
+
+</tr>
+
+
+
+</tbody>
+
+</table>
+</body>
+</html>

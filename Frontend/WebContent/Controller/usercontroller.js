@@ -4,16 +4,16 @@
 app.controller('UserController',function($scope,UserService,$location,$rootScope,$cookieStore){
 
 $scope.registerUser=function(){
-	console.log("USER DATA IS "+$scope.user)
+	console.log("USER DATA IS "+$scope.user);
 	UserService.registerUser($scope.user).then(function(response){
-	console.log(response.data)
-	console.log(response.status)
-	$location.path('/Login')
+	console.log(response.data);
+	console.log(response.status);
+	$location.path('/Login');
 },function(response){
-	console.log(response.data)
-	console.log(response.status)
+	console.log(response.data);
+	console.log(response.status);
 	$scope.error=response.data;
-	$location.path('/Register')
+	$location.path('/Register');
 })
 }
 
@@ -27,8 +27,9 @@ $scope.login=function(){
 		
 		console.log(response.data);
 		console.log(response.status);
-		$location.path('/Home')
+		
 },function(response){
+	
 	$scope.error=response.data.message;
 	$location.path('/Login')
 		})
