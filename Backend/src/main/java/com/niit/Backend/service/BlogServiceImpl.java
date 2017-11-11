@@ -29,7 +29,7 @@ BlogDao blogDao;
 		return blogDao.getBlog(id);
 	}
 	
-//	public List<Blog> getAllBlogsRejected(int rejected) {
-//		return blogDao.getAllBlogsRejected(rejected);
-//	}
+	public List<Blog> getAllBlogsRejected(int rejected) {
+		return blogDao.getAllBlogsRejected(rejected);
+	}
 }

@@ -22,7 +22,7 @@ public class Job {
 	private String jobTitle;
 	private String jobDesc;
 	private String skillsRequired;
-	private String workExperience;
+	
 	private String salary;
 	private Date postedOn;
 	private String location;
@@ -51,12 +51,7 @@ public class Job {
 	public void setSkillsRequired(String skillsRequired) {
 		this.skillsRequired = skillsRequired;
 	}
-	public String getWorkExperience() {
-		return workExperience;
-	}
-	public void setWorkExperience(String workExperience) {
-		this.workExperience = workExperience;
-	}
+	
 	public String getSalary() {
 		return salary;
 	}

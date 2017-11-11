@@ -47,7 +47,7 @@ public class FriendController {
 		Friend friend=new Friend();
 		friend.setFromId(username);
 		friend.setStatus('p');
-		friendService.friendRequest(friend);//insert into friend table
+		friendService.friendRequest(friend);
 		return new ResponseEntity<Friend>(friend,HttpStatus.OK);
 		
 	}

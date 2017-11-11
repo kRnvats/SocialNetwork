@@ -5,11 +5,13 @@ import java.util.List;
 
 
 public interface UserDao {
-	public boolean registerUser(User user);
-	boolean isEmailValid(String email);
 	boolean isUsernameValid(String username);
-	User login(User user);
+	public boolean registerUser(User user);
+	public boolean isEmailValid(String email);
+	
+	public User login(User user);
 	public void update(User user);
 	public User getUserByUserName(String firstName);
+	public boolean isUpdatedEmailValid(String email,String username);
 
 }

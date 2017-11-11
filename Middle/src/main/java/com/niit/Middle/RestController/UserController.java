@@ -65,6 +65,7 @@ public ResponseEntity<?> login(@RequestBody User user,HttpSession session)
 			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
+		System.out.println(u.getFirstName());
 		session.setAttribute("firstName",u.getFirstName());
 		return new ResponseEntity<User>(u,HttpStatus.ACCEPTED);
 	

@@ -34,7 +34,10 @@ public class JobController {
 	@RequestMapping(value="/Job",method=RequestMethod.POST)
 	public ResponseEntity<?> addJob(@RequestBody Job job,HttpSession httpSession)
 	{
+	System.out.println("aSDFGHJKL");
+	System.out.println(job.getCompanyName());
 		String userName = (String)httpSession.getAttribute("firstName");
+		System.out.println(userName);
 		if(userName==null)
 		{
 			Error error = new Error(5,"Unauthorized Access");
@@ -48,6 +51,7 @@ public class JobController {
 		}
 		
 			try {
+				System.out.println("test1");
 			jobService.addJob(job);
 			
 			}

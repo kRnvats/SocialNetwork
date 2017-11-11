@@ -43,10 +43,7 @@ app.config(function($routeProvider){
 			templateUrl:'Views/GetAllJobs.html',
 			controller:'JobController'
 		})
-		.when('/uploadProfilePicture',{
-			templateUrl:'Views/uploadprofilepicture.html',
-			
-		})
+		
 		.when('/pendingRequests',{
 			templateUrl:'Views/PendingRequest.html',
 			controller:'FriendController'
@@ -74,14 +71,14 @@ app.run(function($rootScope,$cookieStore,UserService,$location){
 		}
 })
 	
-//		$rootScope.logout=function(){
-//	delete $rootScope.currentUser;
-//
-//		UserService.logout().then (function(response){
-//			$cookieStore.remove('userDetails')
-//			$location.path('/Login')
-//		},function(response){
-//			console.log(response.status)
-//		})
-//	}
-//});
+	$rootScope.logout=function(){
+	delete $rootScope.currentUser;
+
+		UserService.logout().then (function(response){
+			$cookieStore.remove('userDetails')
+			$location.path('/Login')
+		},function(response){
+			console.log(response.status)
+		})
+	
+};

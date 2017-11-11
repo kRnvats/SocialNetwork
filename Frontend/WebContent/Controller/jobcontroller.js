@@ -3,8 +3,8 @@
  */
 app.controller('JobController',function($scope,JobService,$location,$routeParams){
 	var self = this;
-	var id=$routeParams.id;
 	
+//	var id = $routeParams.id;
 	self.job = 
 			{'jobTitle':'',
 			 'location':'',
@@ -13,7 +13,7 @@ app.controller('JobController',function($scope,JobService,$location,$routeParams
 			 'skillsRequired':'',
 			 'salary':'',
 			 'jobDesc':''};
-	var id = $routeParams.id;
+	
 	
 	self.submit = function()
 	{
@@ -48,7 +48,7 @@ app.controller('JobController',function($scope,JobService,$location,$routeParams
 			console.log(response.data)
 		})
 	}
-	function getAllJobs()
+	self.getAllJobs = function()
 	{
 		JobService.getAllJobs().then(function(response){
 			$scope.listOfJobs = response.data;
@@ -58,7 +58,7 @@ app.controller('JobController',function($scope,JobService,$location,$routeParams
 			console.log(response.data)
 		})
 	}
-	getAllJobs();
+	self.getAllJobs();
 	
 	$scope.deleteJob = function(id)
 	{
@@ -75,4 +75,4 @@ app.controller('JobController',function($scope,JobService,$location,$routeParams
 		})
 	}
 	
-})
+});

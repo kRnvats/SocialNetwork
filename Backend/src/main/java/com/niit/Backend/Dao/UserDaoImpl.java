@@ -42,8 +42,9 @@ private SessionFactory sessionFactory;
 			Query query=session.createQuery("from User where emailId=? and password=?");
 			query.setString(0,user.getEmailId());
 			query.setString(1,user.getPassword());
+			user = (User)query.uniqueResult();
 			
-			return (User) query.uniqueResult();
+			return user;
 			
 		}
 	
@@ -67,6 +68,20 @@ private SessionFactory sessionFactory;
 			Session session = sessionFactory.getCurrentSession();
 			User user=(User)session.get(User.class, firstName);
 			return user;
+		}
+
+		public boolean isUpdatedEmailValid(String email,String userName)
+		{
+			Session session = sessionFactory.getCurrentSession();
+			Query query=session.createQuery("from User where emailId=? and firstName!=?");
+			query.setString(0,email);
+			query.setString(1, userName);
+			User user = (User)query.uniqueResult();
+			if(user==null)
+				return true;
+			else
+				return false;
+
 		}
 
 		}

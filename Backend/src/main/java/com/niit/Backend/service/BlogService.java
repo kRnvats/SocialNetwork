@@ -11,5 +11,5 @@ public interface BlogService {
 	public List<Blog> getAllBlogs(int approved);
 	public void approve(Blog blog);
 	Blog getBlog(int id);
-//	public List<Blog> getAllBlogsRejected(int rejected);
+	public List<Blog> getAllBlogsRejected(int rejected);
 }
