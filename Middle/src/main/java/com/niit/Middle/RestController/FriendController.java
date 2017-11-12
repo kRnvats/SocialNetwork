@@ -9,58 +9,86 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import com.niit.Backend.Model.Error;
 import com.niit.Backend.Model.Friend;
 import com.niit.Backend.Model.User;
-import com.niit.Backend.Model.Error;
 import com.niit.Backend.service.FriendService;
-
-import oracle.net.aso.r;
-
-
 
 @Controller
 public class FriendController {
 	@Autowired
 	private FriendService friendService;
-	@RequestMapping(value="/getsuggestedusers",method=RequestMethod.GET)
-	public ResponseEntity<?> getSuggestedUser(HttpSession session){
-		String username=(String)session.getAttribute("username");
-		if(username==null){
-			Error error = new Error(5,"Unauthorised access");
-			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
-			
+	
+	@RequestMapping(value="/getSuggestedUsers",method=RequestMethod.GET)
+	public ResponseEntity<?> listOfSuggestedUsers(HttpSession httpSession)
+	{
+		String userName = (String)httpSession.getAttribute("firstName");
+		if(userName==null)
+		{
+			Error error = new Error(5,"Unauthorized Access");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
 		}
-		List<User> suggestedUsers=friendService.listOfSuggestedUsers(username);
-		return new ResponseEntity<List<User>>(suggestedUsers,HttpStatus.OK);
-		
+		List<User> suggestedUser = friendService.listOfSuggestedUsers(userName);
+		return new ResponseEntity<List<User>>(suggestedUser,HttpStatus.OK);
 	}
-	@RequestMapping(value="/friendrequest/ToId")
-	public ResponseEntity<?> friendRequest(@PathVariable String ToId,HttpSession session){
-		String username=(String)session.getAttribute("userName");
-		if(username==null){
-			Error error=new Error(5,"Unauthorised access");
-			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+	@RequestMapping(value="/pendingRequests",method=RequestMethod.GET)
+	public ResponseEntity<?> pendingRequests(HttpSession httpSession)
+	{
+		String userName = (String)httpSession.getAttribute("firstName");
+		if(userName==null)
+		{
+			Error error = new Error(5,"Unauthorized Access");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
 		}
-		Friend friend=new Friend();
-		friend.setFromId(username);
-		friend.setStatus('p');
+	
+		List<Friend> pendingRequest=friendService.pendingRequests(userName);
+		return new ResponseEntity<List<Friend>>(pendingRequest,HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/friendRequest/{toId}",method=RequestMethod.GET)
+	public ResponseEntity<?> friendRequest(@PathVariable String toId,HttpSession httpSession) 
+	{
+		String userName = (String)httpSession.getAttribute("firstName");
+		if(userName==null)
+		{
+			Error error = new Error(5,"Unauthorized Access");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
+		}
+		Friend friend = new Friend();
+		friend.setFromId(userName);
+		friend.setToId(toId);
+		friend.setStatus('P');
 		friendService.friendRequest(friend);
 		return new ResponseEntity<Friend>(friend,HttpStatus.OK);
-		
 	}
-	@RequestMapping(value="/pendingrequest",method=RequestMethod.PUT)
-	public ResponseEntity<?>PendingRequest(HttpSession session){
-		String username=(String)session.getAttribute("userName");
-		if(username==null){
-			Error error=new Error(5,"Unauthorised access");
-			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+	@RequestMapping(value="/updatePendingRequests",method=RequestMethod.PUT)
+	public ResponseEntity<?> updatePendingRequests(@RequestBody Friend friend,HttpSession httpSession)
+	{
+		String userName = (String)httpSession.getAttribute("firstName");
+		if(userName==null)
+		{
+			Error error = new Error(5,"Unauthorized Access");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
 		}
-		List<r>pendingRequests=friendService.pendingRequests(username);
-		return new ResponseEntity<List<Friend>>(HttpStatus.OK);
-		
-		}
+	
+		friendService.updatePendingRequests(friend);
+		return new ResponseEntity<Friend>(friend,HttpStatus.OK);
 	}
-
+	@RequestMapping(value="/listOfFriends",method=RequestMethod.GET)
+	public ResponseEntity<?> listOfFriends(HttpSession httpSession) 
+	{
+		String userName = (String)httpSession.getAttribute("firstName");
+		if(userName==null)
+		{
+			Error error = new Error(5,"Unauthorized Access");
+			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
+		}
+		List<String> list = friendService.listOfFriends(userName);
+		return new ResponseEntity<List<String>>(list,HttpStatus.OK);
+	}
+}
+		
+		

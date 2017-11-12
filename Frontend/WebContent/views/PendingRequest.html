@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-<div ng-if="PendingRequest.length==0"><b>No Pending Requests</b></div>
+<div ng-if="pendingRequest.length==0"><b>No Pending Requests</b></div>
 
 <table class="table table-striped">
 <tbody>
-<tr ng-repeat="request in PendingRequest">
+<tr ng-repeat="request in pendingRequest">
 	<td>{{request.fromId}}</td>
 	<td><a class="btn btn-primary" ng-click="updatePendingRequest(request,'A')">Accept</a></td>
 		<td><a class="btn btn-danger" ng-click="updatePendingRequest(request,'D')">Delete</a></td>
@@ -21,6 +13,5 @@
 
 
 </tbody>
+
 </table>
-</body>
-</html>

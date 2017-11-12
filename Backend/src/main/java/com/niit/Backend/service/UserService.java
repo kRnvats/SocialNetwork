@@ -1,5 +1,7 @@
 package com.niit.Backend.service;
 
+import java.util.List;
+
 import com.niit.Backend.Model.User;
 
 public interface UserService {
@@ -14,6 +16,10 @@ public interface UserService {
 
 	User getUserByUserName(String firstName);
 	User login(User user);
+
+	List<User> getAllUser();
+
+	public boolean isUpdatedEmailValid(String emailId, String userName);
 	
 	
 

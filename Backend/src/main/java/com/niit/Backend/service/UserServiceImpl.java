@@ -41,4 +41,13 @@ private UserDao userDao;
 		return userDao.getUserByUserName(firstName);
 	}
 
+	public List<User> getAllUser() {
+		// TODO Auto-generated method stub
+		return userDao.getAllUser();
+	}
+
+	public boolean isUpdatedEmailValid(String email, String username) {
+		return userDao.isUpdatedEmailValid(email, username);
+	}
+
 }

@@ -13,5 +13,6 @@ public interface UserDao {
 	public void update(User user);
 	public User getUserByUserName(String firstName);
 	public boolean isUpdatedEmailValid(String email,String username);
+	List<User> getAllUser();
 
 }

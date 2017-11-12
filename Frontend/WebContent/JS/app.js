@@ -35,27 +35,31 @@ app.config(function($routeProvider){
 			templateUrl:'Views/ApproveBlog.html',
 			controller:'BlogDetailController'
 		})
-		.when('/Job',{
-			templateUrl:'Views/Job.html',
-			controller :'JobController'
+
+		.when('/addJob',{
+			templateUrl:'Views/addJob.html',
+			controller : 'JobController'
 		})
 		.when('/getAllJobs',{
-			templateUrl:'Views/GetAllJobs.html',
+			templateUrl:'Views/getAllJobs.html',
 			controller:'JobController'
 		})
-		
 		.when('/pendingRequests',{
-			templateUrl:'Views/PendingRequest.html',
+			templateUrl:'Views/pendingRequest.html',
 			controller:'FriendController'
 		})
 		.when('/getSuggestedUsers',{
-			templateUrl:'Views/SuggestedUser.html',
+			templateUrl:'Views/suggestedusers.html',
 			controller:'FriendController'
 			
 		})
-		.when('/Friends',{
-			templateUrl:'Views/Friends.html',
+		.when('/listOfFriends',{
+			templateUrl:'Views/listoffriends.html',
 			controller:'FriendController'
+		})
+		.when('/chat',{
+			templateUrl:'Views/chat.html',
+			controller:'ChatController'
 		})
 	.otherwise({
 		templateUrl:'Views/Home.html'
@@ -66,19 +70,34 @@ app.config(function($routeProvider){
 app.run(function($rootScope,$cookieStore,UserService,$location){
 	if ($rootScope.currentUser==undefined)
 		{
-		$rootScope.currentUser=$cookieStore.get('userDetails')
-		console.log('hello'+ $cookieStore.get('userDetails'));
+		$rootScope.currentUser=$cookieStore.get('userDetails');
+		}
+	
+	
+
+
+
+
+	$rootScope.logout = function()
+	{
+		$cookieStore.remove('userDetails');
+		delete $rootScope.currentUser;
+		$location.path('/Login');
+		UserService.logout()
+		.then(function(response){
+	
+	
+	$scope.error = "Logout out Successfully";
+},function(response){
+	if(response.status==401)
+		{
+		
+		delete $rootScope.currentUser;
+		$cookieStore.remove('userDetails');
+		console.log("REMOVE CURRENT USER");
+
+		$location.path('/Login');
 		}
 })
-	
-	$rootScope.logout=function(){
-	delete $rootScope.currentUser;
-
-		UserService.logout().then (function(response){
-			$cookieStore.remove('userDetails')
-			$location.path('/Login')
-		},function(response){
-			console.log(response.status)
-		})
-	
-};
+}
+})

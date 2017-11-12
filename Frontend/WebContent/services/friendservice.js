@@ -1,7 +1,9 @@
+/**
+ * 
+ */
 app.factory('FriendService',function($http){
 	var friendService={}
 	var BASE_URL="http://localhost:8087/Middle"
-		
 		friendService.listOfSuggestedUsers = function()
 		{
 			return $http.get(BASE_URL+"/getSuggestedUsers")
@@ -13,7 +15,7 @@ app.factory('FriendService',function($http){
 
 	friendService.pendingRequests= function()
 	{
-		return $http.get(BASE_URL+"/PendingRequests")
+		return $http.get(BASE_URL+"/pendingRequests")
 	}
 	friendService.updatePendingRequest= function(request)
 	{
@@ -21,7 +23,8 @@ app.factory('FriendService',function($http){
 	}
 	friendService.listOfFriends=function()
 	{
-		return $http.get(BASE_URL+"/Friends")
+		return $http.get(BASE_URL+"/listOfFriends")
 	}
+	
 	return friendService;
 })

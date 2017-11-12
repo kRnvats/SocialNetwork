@@ -1,19 +1,17 @@
 package com.niit.Backend.Model;
 
 import java.util.Date;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.Generated;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Component
+
 public class Job {
 
 	@Id
@@ -21,17 +19,18 @@ public class Job {
 	private int jobId;
 	private String jobTitle;
 	private String jobDesc;
-	private String skillsRequired;
-	
+	private String skillRequired;
 	private String salary;
 	private Date postedOn;
 	private String location;
 	private String companyName;
-	public int getJobId() {
+	public int getJobId(){
 		return jobId;
+		
 	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
+	public void setJobId(int jobId){
+		this.jobId= jobId;
+		
 	}
 	public String getJobTitle() {
 		return jobTitle;
@@ -45,13 +44,12 @@ public class Job {
 	public void setJobDesc(String jobDesc) {
 		this.jobDesc = jobDesc;
 	}
-	public String getSkillsRequired() {
-		return skillsRequired;
+	public String getSkillRequired() {
+		return skillRequired;
 	}
-	public void setSkillsRequired(String skillsRequired) {
-		this.skillsRequired = skillsRequired;
+	public void setSkillRequired(String skillRequired) {
+		this.skillRequired = skillRequired;
 	}
-	
 	public String getSalary() {
 		return salary;
 	}
@@ -76,5 +74,8 @@ public class Job {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	
+	
+	
 	
 }

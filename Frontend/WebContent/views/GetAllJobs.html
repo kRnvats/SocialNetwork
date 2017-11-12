@@ -9,18 +9,17 @@
 <b>List Of Jobs</b>
 <table class="table table-striped">
 <thead>
-<tr><th>Job Title</th><th>Job Package</th><th>Company name</th><th>Work Experience</th><th>Skills Required</th><th>Job Location</th><th>Posted On </th><th>Action</th></tr>
+<tr><th>Job Title</th><th>Job Package</th><th>Company name</th><th>Skills Required</th><th>Job Location</th><th>Posted On </th><th>Action</th></tr>
 </thead>
 <tbody>
 <tr ng-repeat="jobs in listOfJobs">
 
-<td>{{jobs.JobTitle}}</td>
-<td>{{jobs.Salary}}</td>
-<td>{{jobs.CompanyName}}</td>
-<td>{{jobs.WorkExperience}}</td>
-<td>{{jobs.SkillsRequired }}</td>
-<td>{{jobs.Location}}</td>
-<td>{{jobs.PostedOn | date :'DD/MM/YY '}}</td>
+<td>{{jobs.jobTitle}}</td>
+<td>{{jobs.salary}}</td>
+<td>{{jobs.companyName}}</td>
+<td>{{jobs.skillsRequired }}</td>
+<td>{{jobs.location}}</td>
+<td>{{jobs.postedOn | date :'dd/MM/yy hh:mm'}}</td>
 <td><button  ng-show="currentUser.role=='ADMIN'" class="btn btn-danger" ng-click="deleteJob(jobs.jobId)">Delete</button>
 </td>
 
