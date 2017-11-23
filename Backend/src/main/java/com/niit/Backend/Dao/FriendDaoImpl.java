@@ -25,8 +25,8 @@ public class FriendDaoImpl implements FriendDao {
 	public List<User> listOfSuggestedUsers(String userName) {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("deprecation")
-		SQLQuery query = session.createSQLQuery("select * from usertable where userName in"
-				+"(select userName from usertable where userName!=? minus"
+		SQLQuery query = session.createSQLQuery("select * from user_table where firstName in"
+				+"(select firstName from user_table where firstName!=? minus"
 				+"(select fromId from friend where toId=?"
 				+"union select toId from friend where fromId=?"
 				+"))");
@@ -44,10 +44,19 @@ public class FriendDaoImpl implements FriendDao {
 		
 	}
 	public List<Friend> pendingRequests(String toID) {
+		System.out.println("dao impl friend"+toID);
+		char s='P';
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Friend where toId=? and status='P'");
-		query.setString(0, toID);
-		return query.list();
+		Query query = session.createQuery("from Friend where toId=? and status=?");
+		query.setParameter(0, toID);
+		query.setParameter(1,s);
+		List<Friend> list =query.list();
+		for(Friend f:list)
+		{
+			System.out.println("from"+f.getFromId());
+			System.out.println(f.getId());
+		}
+		return list;
 	}
 	public void updatePendingRequest(Friend friend) {
 		Session s = sessionFactory.getCurrentSession();
@@ -61,12 +70,12 @@ public class FriendDaoImpl implements FriendDao {
 		Session session= sessionFactory.getCurrentSession();
 		@SuppressWarnings("deprecation")
 		SQLQuery query1 = session.createSQLQuery("select fromId from Friend where toId=? and status='A'")
-				.addScalar("fromID", StandardBasicTypes.STRING);
+				.addScalar("fromId", StandardBasicTypes.STRING);
 				query1.setString(0, userName);
 		List<String> list = query1.list();
 		System.out.println(list);
 		Query query2 = session.createSQLQuery("select toId from Friend where fromId=? and status='A'")
-				.addScalar("toID",StandardBasicTypes.STRING);
+				.addScalar("toId",StandardBasicTypes.STRING);
 		query2.setString(0, userName);
 
 		List<String> list1 = query2.list();
