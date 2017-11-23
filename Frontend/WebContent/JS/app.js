@@ -19,11 +19,11 @@ app.config(function($routeProvider){
 		templateUrl:'Views/EditProfile.html',
 			controller:'UserController'
 		})
-		.when('/createBlog',{
+		.when('/CreateBlog',{
 			templateUrl:'Views/CreateBlog.html',
 			controller:'BlogController'
 		})
-		.when('/getAllBlogs',{
+		.when('/GetBlog',{
 			templateUrl:'Views/GetBlog.html',
 			controller:'BlogController'
 		})
@@ -44,7 +44,7 @@ app.config(function($routeProvider){
 			templateUrl:'Views/getAllJobs.html',
 			controller:'JobController'
 		})
-		.when('/pendingRequests',{
+		.when('/pendingRequest',{
 			templateUrl:'Views/pendingRequest.html',
 			controller:'FriendController'
 		})

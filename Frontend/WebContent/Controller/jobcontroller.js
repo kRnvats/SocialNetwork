@@ -52,13 +52,13 @@ app.controller('JobController',function($scope,JobService,$location,$routeParams
 			console.log($scope.listOfJobs);
 			
 			},function(response){
-				console.log(response.data)
+				console.log(response.data);
 			})
 		}
 		getAllJobs();
 		$scope.deleteJob= function(id)
 		{
-			JobService.deleteJon(id).then(function(response){
+			JobService.deleteJob/(id).then(function(response){
 				alter("Deleted Successfully")
 				getAllJobs();
 				$location.path('/getAllJobs')

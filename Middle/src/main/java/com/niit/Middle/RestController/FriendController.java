@@ -37,6 +37,7 @@ public class FriendController {
 	@RequestMapping(value="/pendingRequests",method=RequestMethod.GET)
 	public ResponseEntity<?> pendingRequests(HttpSession httpSession)
 	{
+		System.out.println("pending user");
 		String userName = (String)httpSession.getAttribute("firstName");
 		if(userName==null)
 		{
@@ -45,12 +46,13 @@ public class FriendController {
 		}
 	
 		List<Friend> pendingRequest=friendService.pendingRequests(userName);
+		for(Friend f:pendingRequest) System.out.println("frienf from"+f.getFromId());
 		return new ResponseEntity<List<Friend>>(pendingRequest,HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/friendRequest/{toId}",method=RequestMethod.GET)
-	public ResponseEntity<?> friendRequest(@PathVariable String toId,HttpSession httpSession) 
-	{
+	public ResponseEntity<?> friendRequest(@PathVariable("toId") String toId,HttpSession httpSession) 
+	{	System.out.println(toId);
 		String userName = (String)httpSession.getAttribute("firstName");
 		if(userName==null)
 		{
@@ -81,12 +83,14 @@ public class FriendController {
 	public ResponseEntity<?> listOfFriends(HttpSession httpSession) 
 	{
 		String userName = (String)httpSession.getAttribute("firstName");
+		System.out.println("username"+userName);
 		if(userName==null)
 		{
 			Error error = new Error(5,"Unauthorized Access");
 			return new ResponseEntity<Error>(error,HttpStatus.NOT_ACCEPTABLE);
 		}
 		List<String> list = friendService.listOfFriends(userName);
+	
 		return new ResponseEntity<List<String>>(list,HttpStatus.OK);
 	}
 }

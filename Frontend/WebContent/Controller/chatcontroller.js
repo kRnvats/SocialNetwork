@@ -18,3 +18,4 @@ app.controller('ChatController', function($scope, $rootScope, ChatService) {
 		$scope.messages.push(message);
 	});
 });
+

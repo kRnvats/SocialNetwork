@@ -11,14 +11,15 @@ app.controller('FriendController',function($scope,$location,FriendService){
 	}
 		function pendingRequests(){
 			FriendService.pendingRequests().then(function(response){
+				console.log("pending request");
 				$scope.pendingRequest= response.data;
 			},function(response){
 				$location.path('/Login')
 			})
 
 			}
-		$scope.sendFriendRequest=function(toID){
-			FriendService.sendFriendRequest(toID).then(function(response){
+		$scope.sendFriendRequest=function(toId){
+			FriendService.sendFriendRequest(toId).then(function(response){
 				alert("SENT Successfully");
 				listOfSuggestedUsers()
 				$location.path('/getSuggestedUsers')
@@ -31,7 +32,7 @@ app.controller('FriendController',function($scope,$location,FriendService){
 			request.status=statusValue;
 			FriendService.updatePendingRequest(request).then(function(response){
 				pendingRequests()
-				$location.path('/pendingRequests')
+				$location.path('/pendingRequest')
 			},function(response){
 				
 			})
@@ -39,6 +40,7 @@ app.controller('FriendController',function($scope,$location,FriendService){
 		}
 		function listOfFriends()
 		{
+			console.log("list of friends");
 			FriendService.listOfFriends().then(function(response){
 				$scope.listOfFriends=response.data;
 			},function(response){
